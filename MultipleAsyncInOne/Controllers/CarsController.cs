@@ -93,10 +93,10 @@ namespace MultipleAsyncInOne.Controllers {
 
             using (HttpClient client = new HttpClient()) {
 
-                var response = await client.GetAsync(uri).ConfigureAwait(false);
-                var content = await response.Content.ReadAsAsync<IEnumerable<Car>>().ConfigureAwait(false);
+                HttpResponseMessage response = await client.GetAsync(uri).ConfigureAwait(false);
+                IEnumerable<Car> cars = await response.Content.ReadAsAsync<IEnumerable<Car>>().ConfigureAwait(false);
 
-                return content;
+                return cars;
             }
         }
 
