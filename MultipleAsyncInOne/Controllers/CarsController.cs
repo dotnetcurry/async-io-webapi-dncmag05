@@ -68,9 +68,11 @@ namespace MultipleAsyncInOne.Controllers {
         [HttpGet] // Asynchronous and In Parallel (In a Blocking Fashion)
         public IEnumerable<Car> AllCarsInParallelBlockingAsync() {
 
-            // NOTE: As we are using async/await keyword for our client requests below,
+            // NOTE: As we are using async/await keywords for our client async requests below,
             // it will use System.Threading.SynchronizationContext by default.
-            // If we don't use ConfigureAwait(false), it will introduce deadlock here.
+            // If we don't use ConfigureAwait(false), it will introduce deadlock here because
+            // we are making a blocking call. More info:
+            // http://www.tugberkugurlu.com/archive/asynchronousnet-client-libraries-for-your-http-api-and-awareness-of-async-await-s-bad-effects
             
             IEnumerable<Task<IEnumerable<Car>>> allTasks = PayloadSources.Select(uri => GetCarsAsync(uri));
             Task.WaitAll(allTasks.ToArray());
