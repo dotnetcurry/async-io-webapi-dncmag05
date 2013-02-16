@@ -2,26 +2,26 @@
 using System.Threading;
 using System.Web.Http;
 using PayloadApplication.Models;
+using System.Threading.Tasks;
 
 namespace PayloadApplication.APIs {
 
     public class CarsController : ApiController {
 
+        private const int MillisecondsDelay = 500;
         readonly CarsContext _carsContext = new CarsContext();
 
         [HttpGet]
-        public IEnumerable<Car> Cheap() {
+        public async Task<IEnumerable<Car>> Cheap() {
 
-            Thread.Sleep(1000);
-
+            await Task.Delay(MillisecondsDelay);
             return _carsContext.GetCars(car => car.Price < 50000);
         }
 
         [HttpGet]
-        public IEnumerable<Car> Expensive() {
+        public async Task<IEnumerable<Car>> Expensive() {
 
-            Thread.Sleep(1000);
-
+            await Task.Delay(MillisecondsDelay);
             return _carsContext.GetCars(car => car.Price >= 50000);
         }
     }
