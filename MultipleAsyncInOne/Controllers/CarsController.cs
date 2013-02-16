@@ -19,7 +19,7 @@ namespace MultipleAsyncInOne.Controllers {
         public float Price { get; set; }
     }
 
-    public class CarsController : BaseController {
+    public class CarsController : ApiController {
 
         public static readonly string[] PayloadSources = new[] { 
             "http://localhost:2700/api/cars/cheap",
