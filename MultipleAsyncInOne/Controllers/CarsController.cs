@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace MultipleAsyncInOne.APIs {
+namespace MultipleAsyncInOne.Controllers {
 
     public class Car {
 

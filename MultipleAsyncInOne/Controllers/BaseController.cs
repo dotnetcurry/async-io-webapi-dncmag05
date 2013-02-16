@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
-namespace MultipleAsyncInOne.APIs {
+namespace MultipleAsyncInOne.Controllers {
     
     public abstract class BaseController : ApiController {
     }
