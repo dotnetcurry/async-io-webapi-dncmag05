@@ -42,14 +42,10 @@ namespace MultipleAsyncInOne.Controllers {
         [HttpGet] // Synchronous and In Parallel
         public IEnumerable<Car> AllCarsInParallelSync() {
 
-            ConcurrentDictionary<IEnumerable<Car>, bool> carsResult = new ConcurrentDictionary<IEnumerable<Car>, bool>();
-            Parallel.ForEach(PayloadSources, uri => {
+            IEnumerable<Car> cars = PayloadSources.AsParallel()
+                .SelectMany(uri => GetCars(uri)).AsEnumerable();
 
-                IEnumerable<Car> cars = GetCars(uri);
-                carsResult.TryAdd(cars, true);
-            });
-
-            return carsResult.SelectMany(x => x.Key);
+            return cars;
         }
 
         [HttpGet] // Asynchronous and not In Parallel
